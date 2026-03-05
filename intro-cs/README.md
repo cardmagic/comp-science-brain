@@ -165,7 +165,6 @@ Deploy it. Give them the URL. Let them use the thing they just watched get built
 Side by side:
 - Age 9: called a 1-800 number to patent a can opener
 - Age 13: built a magic tricks website
-- Age 17: was a choir geek, not a CS major
 - Today: staff engineer at Zapier, code used by millions, patents with Apple
 
 "I didn't study computer science in college. I studied physics. Nobody gave me permission to do any of this. I just... couldn't stop."
@@ -200,7 +199,6 @@ Be ready for:
 | Landing page / AppFog | Yes -- simplified | Focus on the "too tired to code, shipped anyway" angle |
 | Got hacked by teenagers | Yes -- big moment | Hackers were their age. Both sides are relatable. |
 | Cafe rejection / network | Brief mention in Q&A only | Too abstract for beginners unless asked about it |
-| Vienna choir | Skip | Save for AP where the gumption theme has more runway |
 | Layoffs | Skip | Too heavy for intro audience |
 | Quit with baby on the way | Skip | Mention only if asked about risk/fear |
 | Failed ideas | Brief mention | "I failed a bunch of times first" -- don't dwell |

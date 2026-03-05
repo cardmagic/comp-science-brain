@@ -68,7 +68,6 @@ See **stories.md** for full versions of each story. Summary:
 | Started at their age | **Age 13: cardmagic** -- obsessed with magic, built his first website to let magicians share tricks. Age 9: called a 1-800 number to patent an improved can opener. | The curiosity starts NOW, not in college |
 | Vulnerability as strength | **Got hacked by teenagers** -- wrote an honest blog post about it, read 100K+ times, drew thousands of new customers | Transparency beats polish |
 | Gumption despite fear | **Quit his job with a baby on the way** -- wife 6 months pregnant, sole breadwinner, highest salary he'd ever made. Quit anyway. | Courage isn't the absence of fear |
-| High school connection | **Choir in Vienna** -- director diagnosed with cancer, couldn't travel. Boys rallied, won first prize, brought trophy home. She died shortly after. | Same values: courage, determination, follow-through |
 
 ---
 
@@ -156,7 +155,7 @@ Be ready for: "How much do you make?" "Do I need college?" "Will AI replace prog
 - [ ] Anonymous Q&A tool? (Mentimeter, AhaSlides?)
 - [x] How to adjust for the 2-hour vs 70-min sessions? → All three target ~1 hour of talk. Flexible if Q&A is flowing. CHS has most room to breathe. Period 5 needs room for Saied's teacher-led Q&A about career/college/entrepreneurship.
 - [x] Should salary numbers be part of this? → Talk about salary in generals, not specifics. Mention ranges and trajectory, not personal numbers.
-- [ ] Which stories to tell in which sessions? (Vienna choir is great for HS students; cafe rejection is great for the college point)
+- [ ] Which stories to tell in which sessions? (cafe rejection is great for the college point)
 - [ ] Should the "got hacked by teenagers" story go in the Intro CS sessions? (relatable -- hacked by people their age)
 - [ ] Some quotes need cleaning for HS audience ("They make you fucking buff" → different phrasing)
 

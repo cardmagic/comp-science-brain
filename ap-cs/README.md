@@ -211,17 +211,7 @@ Deploy. Give them the URL. Let them use it.
 2. Curiosity, gumption, and follow-through -- not knowledge -- are what separate people.
 3. College is for exploring, networking, and following through. Not for learning to code.
 
-### Slide 21: One more thing
-
-The Vienna choir story -- brief, emotional, ties it together.
-
-"In high school I was a choir geek. Our director was diagnosed with cancer senior year. We were supposed to go to an international competition in Vienna, but she couldn't travel. We went without her. Things went badly at first. Then we got a call that she'd taken a turn for the worse. We rallied. We practiced maniacally. We won first prize."
-
-"We brought the trophy home to her. She passed away shortly after."
-
-"This isn't a programming story. But it's about the same thing: courage, determination, follow-through. A group of high schoolers -- your age -- committed to something that mattered. The values that won in Vienna are the same values that matter in everything."
-
-### Slide 22: Open to Saied + Q&A
+### Slide 21: Open to Saied + Q&A
 
 Hand it to Saied for his questions about:
 - College experience and choosing a school
@@ -249,7 +239,6 @@ Then open it up to student questions. Be ready for:
 | Robo-advisor rabbit hole | Yes -- curiosity section | Shows curiosity as a pattern, not a one-time thing |
 | Failed ideas (invoicing, wedding, 7 years) | Yes -- follow-through section | "Same person, same skills, different outcome" |
 | Layoffs | Yes -- gumption section | Mature enough audience for this story |
-| Vienna choir | Yes -- closing | Emotional anchor. Lands harder because they're the same age. |
 | Quit with baby on the way | Yes -- brief, courage point | "Fear never goes away" |
 | Landing page / AppFog origin | Yes -- follow-through | The "too tired to code" angle |
 | Got hacked | Brief mention | Under "trail you leave" -- transparency beats polish |
@@ -261,7 +250,7 @@ Then open it up to student questions. Be ready for:
 | Dimension | Intro CS | AP CS |
 |-----------|----------|-------|
 | Emotional anchor | "I started where you are" | "The path you're imagining may not exist" |
-| Story weight | Age-13 origin, getting hacked | Cafe rejection, layoffs, Vienna choir |
+| Story weight | Age-13 origin, getting hacked | Cafe rejection, layoffs |
 | Demo narration | "Watch me build this" | "Watch my decision-making process" |
 | College message | Brief -- "something to think about" | Detailed -- "here's how to use it strategically" |
 | Closing | Empowering -- "start now" | Challenging -- "the values matter more than the skills" |

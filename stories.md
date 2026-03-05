@@ -158,22 +158,6 @@ His thoughts constantly revolted: "This is stupid. I should quit. I'm a failure.
 
 ---
 
-## THE CHOIR IN VIENNA (Character Under Pressure)
-
-**Supports:** Point #3 (gumption, follow-through), relatable to HS students
-
-Lucas was a "major choir geek" growing up, going to international competitions. His director Laurie Gutormson was diagnosed with breast cancer in his senior year. The men's choir was supposed to fly to Vienna for a prestigious competition, but Laurie couldn't travel. They went without her.
-
-Things went badly at first (boys caught drinking after curfew). Then they got a call that Laurie had taken a turn for the worse. They rallied, practiced maniacally, and won first prize -- guided by the core values Laurie had instilled: courage, determination, and hard work.
-
-They brought the trophy home to Laurie, who lived just long enough to share it with them before passing away.
-
-**The lesson for students:** This isn't a programming story. It's a story about what happens when a group of high schoolers -- their age -- commit to something that matters. The values that won in Vienna are the same values that matter in programming: courage, determination, follow-through. It's not about talent.
-
-**Source:** Finding Success in Failure, Chapter 1
-
----
-
 ## MEMORABLE QUOTES (From Lucas's Writing)
 
 **On failure:**
