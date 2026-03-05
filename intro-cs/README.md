@@ -168,7 +168,7 @@ Side by side:
 - Age 17: was a choir geek, not a CS major
 - Today: staff engineer at Zapier, code used by millions, patents with Apple
 
-"I didn't study computer science in college. I studied philosophy. Nobody gave me permission to do any of this. I just... couldn't stop."
+"I didn't study computer science in college. I studied physics. Nobody gave me permission to do any of this. I just... couldn't stop."
 
 ### Slide 18: What I want you to remember
 

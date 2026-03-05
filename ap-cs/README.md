@@ -36,7 +36,7 @@ Brief. They're more advanced, so the credentials can land faster.
 - Today: staff engineer at Zapier, building AI that uses APIs in the real world
 - Published programming books through O'Reilly
 
-One key detail for this audience: "I didn't study CS in college. I studied philosophy and religion."
+One key detail for this audience: "I didn't study CS in college. I studied physics."
 
 Let that sit.
 
