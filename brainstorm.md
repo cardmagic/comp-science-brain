@@ -39,11 +39,15 @@ These are beginners deciding if CS is for them. The thesis tells them:
 - The students in this room who tinker at home, who break things and fix them, who can't stop asking "but how does it work?" -- those are the ones who will thrive.
 - The entry-level job that used to be waiting for you won't be there. But if you're genuinely curious, you'll build things that create your own opportunities.
 
+**Saied's note:** Strong gaming interest in this group. Expect questions about game development, AI in games, and how coding connects to that world. Emphasize the value of learning coding skills in HS even as AI advances -- understanding code helps you understand and influence the technology itself.
+
 ### Mixed CSP/CSA (SCHS Period 5)
 These are more advanced students, some aiming for CS careers. The thesis tells them:
 - You're already past the starting line. But the junior dev ramp you're expecting after college may not exist.
 - Double down on curiosity and depth. Don't just learn Java syntax -- understand WHY things work the way they do.
 - College strategy matters: build relationships, explore broadly, follow through on side projects. The network you build matters more than the GPA.
+
+**Saied's note:** He wants to ask questions about college experience, career path, internships, entrepreneurship, scholarships, and how you chose which areas of CS/AI to pursue. Leave room for this teacher-led Q&A -- practical "how do I actually get there" guidance is what they want most.
 
 ---
 
@@ -150,7 +154,7 @@ Be ready for: "How much do you make?" "Do I need college?" "Will AI replace prog
 - [x] What's the right live demo? → Students vote on one of three apps, build it live with AI
 - [ ] Google Slides or something else?
 - [ ] Anonymous Q&A tool? (Mentimeter, AhaSlides?)
-- [ ] How to adjust for the 2-hour vs 70-min sessions? (CHS gets demo + extended Q&A, SCHS gets tighter versions?)
+- [x] How to adjust for the 2-hour vs 70-min sessions? → All three target ~1 hour of talk. Flexible if Q&A is flowing. CHS has most room to breathe. Period 5 needs room for Saied's teacher-led Q&A about career/college/entrepreneurship.
 - [x] Should salary numbers be part of this? → Talk about salary in generals, not specifics. Mention ranges and trajectory, not personal numbers.
 - [ ] Which stories to tell in which sessions? (Vienna choir is great for HS students; cafe rejection is great for the college point)
 - [ ] Should the "got hacked by teenagers" story go in the Intro CS sessions? (relatable -- hacked by people their age)
