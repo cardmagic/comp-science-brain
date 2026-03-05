@@ -115,8 +115,30 @@ Q&A, polls, or a quick activity. Let them process.
 ### Part 3: Playing the Long Game (10-15 min)
 Point #4. College strategy. Not studying CS in college. Using it to explore, network, follow through. The relationships that shaped the career.
 
-### Demo (10-15 min, optional for longer sessions)
-Show something real. AI doing something tangible. Connect it back: "This is what curiosity and follow-through looks like at the professional level."
+### Demo: "Let's Build Something Right Now" (10-15 min)
+Students vote on which app to build. Then build it live using AI, in front of them.
+
+**The three choices:**
+
+1. **Tier List Maker** -- Pick a category (fast food, Marvel movies, school subjects), drag items into S/A/B/C/D/F tiers, share your list with friends, compare rankings. Teens are deep into tier list culture right now.
+
+2. **Friendship Compatibility Quiz** -- Answer 10 questions, get a shareable link, friends take the same quiz, see a match percentage. The BFF quiz concept but as a clean web app they'd actually share.
+
+3. **Song Battle Bracket** -- Submit two songs, everyone votes on which is better, winners advance bracket-style. Music is universal teen currency.
+
+**Why this format works:**
+- The vote itself is interactive -- class is participating before a line of code is written
+- Building with AI demonstrates the Zapier/AI work in a tangible way
+- It proves thesis point #3 live: curiosity + follow-through (picking an idea and shipping it) matters more than knowing every syntax detail
+- The result is something they can actually share with friends after class
+- When things break (and they will), it's a teaching moment about debugging and gumption
+- Meta-layer: "I'm building what you just chose, using the tools I work on every day, right now"
+
+**Voting app:** Live at `talk-voter.craftsman-founder.workers.dev` (CF Worker + KV). Students scan a QR code, vote on their phones, results update every 2 seconds. Source: `cf-services/api-services/talk-voter/`. Reset endpoint available between sessions.
+
+**Tech requirements:** Laptop, internet, projector. Need to confirm with Saied what's available. Could use Claude, Cursor, or similar AI coding tool. Deploy to Vercel/Netlify for instant shareable URL.
+
+**Prep:** Pre-test all three so any of them can be built smoothly. Have fallback screenshots/recordings if wifi dies.
 
 ### Open Q&A (remaining time)
 Be ready for: "How much do you make?" "Do I need college?" "Will AI replace programmers?" "What language should I learn?"
@@ -125,18 +147,19 @@ Be ready for: "How much do you make?" "Do I need college?" "Will AI replace prog
 
 ## Questions Still Open
 
-- [ ] What's the right live demo? (Needs to wow Intro students AND interest advanced ones)
+- [x] What's the right live demo? → Students vote on one of three apps, build it live with AI
 - [ ] Google Slides or something else?
 - [ ] Anonymous Q&A tool? (Mentimeter, AhaSlides?)
 - [ ] How to adjust for the 2-hour vs 70-min sessions? (CHS gets demo + extended Q&A, SCHS gets tighter versions?)
-- [ ] Should salary numbers be part of this? (Students will ask anyway -- better to address it head-on?)
+- [x] Should salary numbers be part of this? → Talk about salary in generals, not specifics. Mention ranges and trajectory, not personal numbers.
 - [ ] Which stories to tell in which sessions? (Vienna choir is great for HS students; cafe rejection is great for the college point)
 - [ ] Should the "got hacked by teenagers" story go in the Intro CS sessions? (relatable -- hacked by people their age)
 - [ ] Some quotes need cleaning for HS audience ("They make you fucking buff" → different phrasing)
 
 ## Next Steps
 
-- [ ] Decide on live demo content
+- [x] Decide on live demo content → Tier List Maker, Friendship Compatibility Quiz, or Song Battle (class votes)
+- [ ] Pre-build all three apps so any can be live-coded smoothly
 - [ ] Build initial slide deck or outline
 - [ ] Coordinate with Saied on tech setup
 - [ ] Practice the demo at least 3 times
