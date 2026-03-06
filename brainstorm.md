@@ -125,7 +125,7 @@ Students vote on which app to build. Then build it live using AI, in front of th
 
 1. **Tier List Maker** -- Pick a category (fast food, Marvel movies, school subjects), drag items into S/A/B/C/D/F tiers, share your list with friends, compare rankings. Teens are deep into tier list culture right now.
 
-2. **Friendship Compatibility Quiz** -- Answer 10 questions, get a shareable link, friends take the same quiz, see a match percentage. The BFF quiz concept but as a clean web app they'd actually share.
+2. **Squad Quiz** -- AI generates wild questions about your squad, then exposes who actually knows you vs. who's been faking it.
 
 3. **Song Battle Bracket** -- Submit two songs, everyone votes on which is better, winners advance bracket-style. Music is universal teen currency.
 
@@ -161,7 +161,7 @@ Be ready for: "How much do you make?" "Do I need college?" "Will AI replace prog
 
 ## Next Steps
 
-- [x] Decide on live demo content → Tier List Maker, Friendship Compatibility Quiz, or Song Battle (class votes)
+- [x] Decide on live demo content → Tier List Maker, Squad Quiz, or Song Battle (class votes)
 - [ ] Pre-build all three apps so any can be live-coded smoothly
 - [ ] Build initial slide deck or outline
 - [ ] Coordinate with Saied on tech setup

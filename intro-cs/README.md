@@ -132,7 +132,7 @@ QR code appears. Students scan and vote on their phones.
 
 Three choices:
 1. **Tier List Maker** -- rank anything into S/A/B/C/D/F tiers. AI roasts your bad takes and defends its own rankings.
-2. **Friendship Compatibility Quiz** -- AI writes the questions based on your vibe, then scores how well your friends actually know you.
+2. **Squad Quiz** -- AI generates wild questions about your squad, then exposes who actually knows you vs. who's been faking it.
 3. **Song Battle Bracket** -- songs go head-to-head, bracket-style. AI plays commentator and predicts the upset picks.
 
 Show live results updating on the projector as votes come in.
