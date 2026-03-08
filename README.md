@@ -1,5 +1,7 @@
 # comp-science-brain
 
+**Voting app:** https://talk-voter.craftsman-founder.workers.dev
+
 Planning materials for guest speaking at Carlsbad High School and Sage Creek High School CS classes on March 12, 2026.
 
 ## The Talk
