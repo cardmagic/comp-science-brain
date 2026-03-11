@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intro to Computer Science — Guest Talk</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --fg: #f0f0f5;
+    --accent: #6366f1;
+    --accent-glow: rgba(99, 102, 241, 0.3);
+    --muted: #71717a;
+    --surface: #18181b;
+    --red: #ef4444;
+    --green: #22c55e;
+    --yellow: #eab308;
+    --orange: #f97316;
+  }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* ── Slide Container ── */
+  .deck {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6vh 8vw;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateX(40px);
+  }
+
+  .slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+
+  .slide.exiting {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+
+  /* ── Typography ── */
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .subtitle {
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+    color: var(--muted);
+    text-align: center;
+    max-width: 70ch;
+    line-height: 1.5;
+  }
+
+  .big-quote {
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    font-weight: 700;
+    text-align: center;
+    max-width: 22ch;
+    line-height: 1.3;
+    position: relative;
+  }
+
+  .big-quote::before {
+    content: '\201C';
+    position: absolute;
+    top: -0.4em;
+    left: -0.5em;
+    font-size: 4em;
+    color: var(--accent-glow);
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+
+  .accent { color: var(--accent); }
+  .red { color: var(--red); }
+  .green { color: var(--green); }
+  .yellow { color: var(--yellow); }
+  .orange { color: var(--orange); }
+
+  /* ── Bullets ── */
+  .bullets {
+    list-style: none;
+    font-size: clamp(1.3rem, 2.5vw, 2rem);
+    line-height: 1.7;
+    max-width: 65ch;
+    text-align: left;
+  }
+
+  .bullets li {
+    padding-left: 1.5em;
+    position: relative;
+    margin-bottom: 0.6em;
+  }
+
+  .bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* ── Number list ── */
+  .number-list {
+    list-style: none;
+    counter-reset: num;
+    font-size: clamp(1.3rem, 2.5vw, 2rem);
+    line-height: 1.7;
+    max-width: 65ch;
+    text-align: left;
+  }
+
+  .number-list li {
+    counter-increment: num;
+    padding-left: 2em;
+    position: relative;
+    margin-bottom: 0.8em;
+  }
+
+  .number-list li::before {
+    content: counter(num) '.';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 900;
+    font-size: 1.1em;
+  }
+
+  /* ── Ladder visual ── */
+  .ladder {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 2rem;
+  }
+
+  .ladder-rung {
+    width: 280px;
+    height: 36px;
+    border: 3px solid var(--fg);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+    position: relative;
+  }
+
+  .ladder-rung {
+    transition: border-color 0.5s ease, opacity 0.5s ease, border-style 0s;
+  }
+
+  .ladder-rung.broken {
+    border-color: var(--red);
+    opacity: 0.3;
+    border-style: dashed;
+  }
+
+  .ladder-rung.broken::after {
+    content: '✕';
+    color: var(--red);
+    font-size: 1.5rem;
+    position: absolute;
+  }
+
+  .ladder-rung.golden {
+    border-color: var(--green);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+  }
+
+  /* ── Side by side ── */
+  .side-by-side {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 900px;
+    width: 100%;
+  }
+
+  .side-col {
+    text-align: center;
+  }
+
+  .side-col .age {
+    font-size: clamp(3rem, 5vw, 5rem);
+    font-weight: 900;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .side-col .detail {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── Takeaway card ── */
+  .takeaway-card {
+    background: var(--surface);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 2.5rem 3rem;
+    max-width: 750px;
+    width: 100%;
+  }
+
+  .takeaway-card .number-list li {
+    font-size: clamp(1.1rem, 2vw, 1.6rem);
+    margin-bottom: 1.2em;
+  }
+
+  /* ── QR section ── */
+  .qr-placeholder {
+    width: 200px;
+    height: 200px;
+    background: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bg);
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  /* ── Vote options ── */
+  .vote-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 960px;
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+
+  .vote-card {
+    background: var(--surface);
+    border: 2px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .vote-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }
+
+  .vote-card .emoji {
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .vote-card h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .vote-card p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* ── Code snippet look ── */
+  .code-block {
+    background: var(--surface);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 2rem 2.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(1rem, 1.8vw, 1.4rem);
+    line-height: 1.8;
+    max-width: 700px;
+    width: 100%;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .code-block .comment { color: var(--muted); }
+  .code-block .keyword { color: var(--accent); }
+  .code-block .string { color: var(--green); }
+  .code-block .fn { color: var(--orange); }
+
+  /* ── Progress bar ── */
+  .progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--accent);
+    transition: width 0.4s ease;
+    z-index: 100;
+  }
+
+  /* ── Slide counter ── */
+  .slide-counter {
+    position: fixed;
+    bottom: 2rem;
+    right: 2.5rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    z-index: 100;
+  }
+
+  /* ── Act label ── */
+  .act-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── Speaker note (hidden by default, toggle with 'n') ── */
+  .speaker-note {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.92);
+    color: var(--muted);
+    padding: 1.2rem 2rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    max-height: 30vh;
+    overflow-y: auto;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    z-index: 200;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .speaker-note.visible {
+    transform: translateY(0);
+  }
+
+  /* ── Emoji pulse ── */
+  .pulse {
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
+  /* ── Fade-in children ── */
+  .slide.active .fade-in {
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .slide.active > .fade-in:nth-child(2) { animation-delay: 0.15s; }
+  .slide.active > .fade-in:nth-child(3) { animation-delay: 0.3s; }
+  .slide.active > .fade-in:nth-child(4) { animation-delay: 0.45s; }
+  .slide.active > .fade-in:nth-child(5) { animation-delay: 0.6s; }
+
+  /* ── Fragments: revealed one at a time on keypress ── */
+  .fragment {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .fragment.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="slide-counter" id="counter"></div>
+
+<!-- ═══════════════════════════════════════════════
+     ACT 1 — THE HOOK (5 min)
+     ═══════════════════════════════════════════════ -->
+
+<!-- SLIDE 1 — Title -->
+<div class="deck">
+
+<div class="slide" data-note="Title slide. Let it sit while students settle in. No rush.">
+  <h1 class="fade-in" style="font-size: clamp(2.2rem, 4.5vw, 3.8rem);">The Future of<br><span class="accent">Computer Science</span></h1>
+  <p class="subtitle fade-in" style="margin-top: 1.5rem;">What nobody's going to tell you — but I will.</p>
+  <p class="subtitle fade-in" style="margin-top: 3rem; font-size: 1rem; color: var(--muted);">Lucas Carlson</p>
+</div>
+
+<!-- SLIDE 2 — Opening Question -->
+<div class="slide" data-note="Wait for hands. Let the silence land. Most hands will go up. Then advance to the next slide for the punchline.">
+  <div class="act-label fade-in">Part 1 of 5</div>
+  <h1 class="fade-in">Raise your hand if you've used<br><span class="accent">ChatGPT</span> this week.</h1>
+</div>
+
+<!-- SLIDE 3 — The punchline -->
+<div class="slide" data-note="Drop this line and PAUSE. Let it land. This reframes everything they just did.">
+  <h1 class="fade-in" style="max-width: 20ch; text-align: center;">Every one of you just did something that would have cost a company <span class="accent">$200/hour</span> five years ago.</h1>
+</div>
+
+<!-- SLIDE 4 — Who Am I -->
+<div class="slide" data-note="60 seconds MAX. Not a resume — a single sentence and a few images. 'I started where you are' is the point.">
+  <div class="act-label fade-in">Part 1 of 5</div>
+  <h2 class="fade-in">I've been coding since I was <span class="accent">13</span>.</h2>
+  <ul class="bullets" style="margin-top: 1.5rem;">
+    <li class="fragment">Wrote code that became <strong>Apple Music</strong></li>
+    <li class="fragment">Started a company, raised $10M, sold it</li>
+    <li class="fragment">Today I work at <strong>Zapier</strong> teaching AI how to order pizza</li>
+  </ul>
+</div>
+
+<!-- SLIDE 3 — What this talk is about -->
+<div class="slide" data-note="Set the agenda. Three things — simple, clear, the 'build something together' line should get energy.">
+  <div class="act-label fade-in">Part 1 of 5</div>
+  <h2 class="fade-in">Three things nobody told me<br>when I was your age.</h2>
+  <ol class="number-list" style="margin-top: 2rem;">
+    <li class="fragment">The <span class="red">honest truth</span> about what's happening to programming jobs</li>
+    <li class="fragment">What <span class="accent">actually matters</span> (it's not what you think)</li>
+    <li class="fragment">We're going to <span class="green">build something</span> together, right now, live</li>
+  </ol>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     ACT 2 — THE HONEST TRUTH (10 min)
+     ═══════════════════════════════════════════════ -->
+
+<!-- SLIDE 4 — Junior dev job disappearing -->
+<div class="slide" data-note="Don't sugarcoat. They can handle truth and will respect you for it. Arrow key breaks the bottom rungs one at a time.">
+  <div class="act-label fade-in">Part 2 of 5</div>
+  <h2 class="fade-in">The junior dev job is <span class="red">disappearing</span>.</h2>
+  <div class="ladder fade-in" style="margin-top: 1rem;">
+    <div class="ladder-rung golden">Distinguished Engineer</div>
+    <div class="ladder-rung golden">Principal Engineer</div>
+    <div class="ladder-rung golden">Staff Engineer</div>
+    <div class="ladder-rung golden">Senior Engineer</div>
+    <div class="ladder-rung fragment-break" data-label="Mid-Level">Mid-Level</div>
+    <div class="ladder-rung fragment-break" data-label="Junior Developer">Junior Developer</div>
+    <div class="ladder-rung fragment-break" data-label="Internships">Internships</div>
+  </div>
+  <p class="subtitle fragment" style="margin-top: 1.5rem; font-size: 1.1rem;">
+    AI handles the work companies used to hire beginners for.<br>
+    The bottom rungs of the ladder are being sawed off.
+  </p>
+</div>
+
+<!-- SLIDE 5 — But wait -->
+<div class="slide" data-note="Pause. Build tension. Short slide, lean into the silence.">
+  <h1 class="fade-in" style="font-size: clamp(3rem, 6vw, 6rem);">But wait.</h1>
+  <p class="subtitle fade-in" style="margin-top: 1rem;">Here's what nobody's talking about.</p>
+</div>
+
+<!-- SLIDE 6 — The top has never been better -->
+<div class="slide" data-note="The tension: bottom is gone, top is extraordinary. The question is HOW you get there.">
+  <div class="act-label fade-in">Part 2 of 5</div>
+  <h2 class="fade-in">The top has <span class="green">never been better</span>.</h2>
+  <ul class="bullets" style="margin-top: 1.5rem;">
+    <li class="fragment">People who <strong>think, architect, debug novel problems</strong> — worth more than ever</li>
+    <li class="fragment">The gap between <em>"can code"</em> and <em>"can build"</em> has never been wider</li>
+    <li class="fragment">Some AI engineers at Google and OpenAI are making <span class="green">millions</span> a year</li>
+  </ul>
+</div>
+
+<!-- SLIDE 7 — Transition -->
+<div class="slide" data-note="Rhetorical question. Don't answer it yet — let them sit with it.">
+  <h1 class="fade-in" style="max-width: 18ch; text-align: center;">
+    So how do you get to the top<br>when the bottom rungs are <span class="red">gone</span>?
+  </h1>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     ACT 3 — WHAT ACTUALLY MATTERS (15 min)
+     ═══════════════════════════════════════════════ -->
+
+<!-- SLIDE 8 — Gumption > Skill -->
+<div class="slide" data-note="This is the thesis. AI can code. AI can't care. Let each line breathe.">
+  <div class="act-label fade-in">Part 3 of 5</div>
+  <h2 class="fade-in">It's not skill.<br>It's <span class="accent">gumption</span>.</h2>
+  <div class="code-block fade-in">
+    <span class="comment">// things AI can do:</span><br>
+    <span class="fn">writeCode</span>();<br>
+    <span class="fn">fixBugs</span>();<br>
+    <span class="fn">generateTests</span>();<br>
+    <br>
+    <span class="comment">// things AI can't do:</span><br>
+    <span class="fn">beCurious</span>();    <span class="comment">// ← you</span><br>
+    <span class="fn">care</span>();          <span class="comment">// ← you</span><br>
+    <span class="fn">imagine</span>();        <span class="comment">// ← you</span>
+  </div>
+</div>
+
+<!-- SLIDE 9 — Curiosity: The 13-year-old magician -->
+<div class="slide" data-note="Tell the story: obsessed with magic at 13, followed WebMonkey tutorial, built magic site. 'What's YOUR combination?' — pause, let them think.">
+  <div class="act-label fade-in">Part 3 of 5</div>
+  <h2 class="fade-in">The 13-year-old magician</h2>
+  <p class="subtitle fragment" style="margin-top: 1.5rem; max-width: 55ch;">
+    <span class="accent">1996.</span> Obsessed with magic. Followed a tutorial. Built a website where magicians shared tricks.
+  </p>
+  <p class="subtitle fragment" style="margin-top: 2rem; max-width: 55ch;">
+    Not because someone assigned it.<br>
+    Because I <strong>couldn't not</strong> do it.
+  </p>
+  <p class="subtitle fragment" style="margin-top: 2.5rem; font-size: clamp(1.2rem, 2.2vw, 1.8rem); color: var(--fg);">
+    The best projects come from combining <br>two things you're already <span class="accent">obsessed</span> with.
+  </p>
+</div>
+
+<!-- SLIDE 10 — Follow-through: the landing page -->
+<div class="slide" data-note="Tell the story: years of building nobody wanted. One night, too tired to code, made ugly landing page. 800 signups overnight. 4000 in two weeks. The $10M company started from exhaustion.">
+  <div class="act-label fade-in">Part 3 of 5</div>
+  <h2 class="fade-in">The landing page that<br>changed everything</h2>
+  <ul class="bullets" style="margin-top: 1.5rem;">
+    <li class="fragment">Years of building things nobody wanted</li>
+    <li class="fragment">One night: too tired to code → made an <strong>ugly landing page</strong></li>
+    <li class="fragment">Woke up to <span class="green">800 signups</span></li>
+    <li class="fragment">Two weeks later: <span class="green">4,000</span> — word of mouth only</li>
+  </ul>
+  <p class="subtitle fragment" style="margin-top: 2rem; font-size: clamp(1rem, 1.8vw, 1.3rem);">
+    That became a <span class="accent">$10 million company</span>.<br>
+    Follow-through means paying attention when something catches fire.
+  </p>
+</div>
+
+<!-- SLIDE 11 — Gumption: got hacked -->
+<div class="slide" data-note="Tell the story: hacked by teenagers (their age!). Hadn't slept 4 days. Wrote honest blog post instead of hiding. 100K reads, thousands of new customers. Both sides of the story are relatable to them.">
+  <div class="act-label fade-in">Part 3 of 5</div>
+  <h2 class="fade-in">Getting hacked<br>by <span class="red">teenagers</span></h2>
+  <ul class="bullets" style="margin-top: 1.5rem;">
+    <li class="fragment">Company got hacked. By kids roughly <strong>your age</strong>.</li>
+    <li class="fragment">Hadn't slept in four days</li>
+    <li class="fragment">Instead of hiding it — wrote an <strong>honest blog post</strong></li>
+    <li class="fragment"><span class="green">100,000+ reads</span>. Thousands of new customers.</li>
+  </ul>
+  <p class="subtitle fragment" style="margin-top: 2rem; font-size: clamp(1rem, 1.8vw, 1.3rem);">
+    When something goes wrong — and it will —<br>
+    the move is to <span class="accent">be honest about it</span>.
+  </p>
+</div>
+
+<!-- SLIDE 12 — The trail you leave -->
+<div class="slide" data-note="Nobody reads resumes. They look at what you've built. GitHub, side projects, mods, experiments. 'I gave away code for free. 9 million downloads. Did more for my career than any degree.'">
+  <div class="act-label fade-in">Part 3 of 5</div>
+  <h2 class="fade-in">Nobody's going to read<br>your <span class="red" style="text-decoration: line-through;">resume</span>.</h2>
+  <p class="subtitle fragment" style="margin-top: 1rem; font-size: clamp(1.3rem, 2.5vw, 2rem); color: var(--fg);">
+    They're going to look at<br>what you've <span class="accent">built</span>.
+  </p>
+  <ul class="bullets" style="margin-top: 2rem;">
+    <li class="fragment">GitHub repos, side projects, experiments, mods</li>
+    <li class="fragment">The trail of things you've made <strong>IS</strong> your resume</li>
+    <li class="fragment">I gave away code for free → <span class="green">9 million downloads</span></li>
+  </ul>
+</div>
+
+<!-- SLIDE 13 — Pause for questions -->
+<div class="slide" data-note="Give them 15-20 seconds of silence. Don't fill it. The questions will come. If nobody asks, that's fine — move on.">
+  <h1 class="fade-in" style="font-size: clamp(2.5rem, 5vw, 4rem);">
+    Questions so far?
+  </h1>
+  <p class="subtitle fade-in" style="margin-top: 1.5rem;">
+    Anything you want to push back on?
+  </p>
+  <p class="fade-in" style="margin-top: 3rem; font-size: 4rem;" class="pulse">🤔</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     ACT 4 — LET'S BUILD SOMETHING (15-20 min)
+     ═══════════════════════════════════════════════ -->
+
+<!-- SLIDE 14 — The vote -->
+<div class="slide" data-note="QR code on projector. Students scan and vote on phones. Results update live every 2 seconds. Energy shift — they become participants.">
+  <div class="act-label fade-in">Part 4 of 5</div>
+  <h2 class="fade-in">You've heard me talk.<br>Now let's <span class="green">do something</span>.</h2>
+  <div class="fragment" style="text-align: center;">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Ftalk-voter.craftsman-founder.workers.dev%2F&bgcolor=ffffff&color=000000" alt="Scan to vote" width="200" height="200" style="border-radius: 12px;">
+    <div style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--muted);">talk-voter.craftsman-founder.workers.dev</div>
+  </div>
+  <div class="vote-options fragment">
+    <div class="vote-card">
+      <div class="emoji">🏆</div>
+      <h3>Tier List Maker</h3>
+      <p>Rank anything into S/A/B/C/D/F tiers. AI roasts your takes.</p>
+    </div>
+    <div class="vote-card">
+      <div class="emoji">👥</div>
+      <h3>Squad Quiz</h3>
+      <p>AI generates questions about your squad. Exposes who really knows you.</p>
+    </div>
+    <div class="vote-card">
+      <div class="emoji">🎵</div>
+      <h3>Song Battle</h3>
+      <p>Songs go head-to-head bracket-style. AI plays commentator.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 15 — Building it live -->
+<div class="slide" data-note="Switch to Claude/Cursor. Narrate: 'I'm describing in plain English.' 'It writes code but I have to know if it's RIGHT.' When it breaks: 'This IS the job. Debugging. Gumption.' Deploy and give them the URL.">
+  <div class="act-label fade-in">Part 4 of 5</div>
+  <h1 class="fade-in" style="font-size: clamp(2.5rem, 5vw, 4rem);">
+    Whatever you just picked,<br>I'm building it <span class="accent">right now</span>.
+  </h1>
+  <div class="code-block fade-in" style="margin-top: 2rem;">
+    <span class="comment">// My actual workflow:</span><br>
+    <span class="keyword">1.</span> Describe what I want in <span class="string">plain English</span><br>
+    <span class="keyword">2.</span> AI writes the code<br>
+    <span class="keyword">3.</span> I check if it's <span class="fn">actually right</span><br>
+    <span class="keyword">4.</span> Fix it when it breaks <span class="comment">// (it will)</span><br>
+    <span class="keyword">5.</span> Ship it <span class="string">→ you get the URL</span>
+  </div>
+</div>
+
+<!-- SLIDE 16 — The meta-lesson -->
+<div class="slide" data-note="After the build. Connect what just happened to the thesis. 'AI handles the code. You handle the thinking.'">
+  <div class="act-label fade-in">Part 4 of 5</div>
+  <h2 class="fade-in">Five years ago that would've taken<br>a team <span class="red">a week</span>.</h2>
+  <p class="subtitle fragment" style="margin-top: 2rem; max-width: 50ch; font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--fg);">
+    I still had to know <span class="accent">what</span> to build,<br>
+    <span class="accent">how</span> to describe it,<br>
+    and <span class="accent">how</span> to fix it when it broke.
+  </p>
+  <p class="subtitle fragment" style="margin-top: 2.5rem;">
+    AI handles the code. <strong>You handle the thinking.</strong>
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     ACT 5 — THE CLOSE (5 min)
+     ═══════════════════════════════════════════════ -->
+
+<!-- SLIDE 17 — Where I started vs. where I am -->
+<div class="slide" data-note="Side-by-side: 9-year-old inventor → 13-year-old magician → today. 'I studied physics, not CS. Nobody gave me permission.' Let the contrast speak.">
+  <div class="act-label fade-in">Part 5 of 5</div>
+  <h1 class="fade-in" style="max-width: 22ch; text-align: center;">I didn't study computer science in college. I studied <span class="accent">physics</span>.</h1>
+  <p class="subtitle fragment" style="margin-top: 2rem; font-size: clamp(1.3rem, 2.5vw, 2rem);">
+    Nobody gave me permission or a degree to be a computer programmer. I just couldn't stop.
+  </p>
+</div>
+
+<!-- SLIDE 18 — Three takeaways -->
+<div class="slide" data-note="One slide. Three lines. Let each one land.">
+  <div class="act-label fade-in">Part 5 of 5</div>
+  <h2 class="fade-in">What I want you<br>to remember</h2>
+  <div class="takeaway-card" style="margin-top: 2rem;">
+    <ol class="number-list">
+      <li class="fragment">The junior dev job is disappearing.<br>The senior job has <span class="green">never been better</span>.</li>
+      <li class="fragment">What gets you there is <span class="accent">curiosity, gumption, and follow-through</span> — not knowledge.</li>
+      <li class="fragment"><span class="yellow">Start now.</span> Not in college. <strong>Now.</strong></li>
+    </ol>
+  </div>
+</div>
+
+<!-- SLIDE 19 — Open Q&A -->
+<div class="slide" data-note="Open it up. Be ready for: 'How much do you make?' (ranges, not personal). 'Will AI replace programmers?' (tasks not people). 'What language?' (doesn't matter, thinking does). 'Do I need college?' (brief version of point #4). Gaming questions: game dev is real engineering, mods teach real skills.">
+  <h1 class="fade-in" style="font-size: clamp(2.5rem, 5vw, 4.5rem);">
+    What do you want<br>to know?
+  </h1>
+  <p class="subtitle fade-in" style="margin-top: 1.5rem;">
+    Anything. College, AI, whatever.
+  </p>
+  <p class="fade-in" style="margin-top: 3rem; font-size: 3rem;">🎤</p>
+</div>
+
+</div><!-- /.deck -->
+
+<!-- ═══════════════════════════════════════════════
+     Speaker Notes Overlay
+     ═══════════════════════════════════════════════ -->
+<div class="speaker-note" id="speakerNote"></div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const progress = document.getElementById('progress');
+  const counter = document.getElementById('counter');
+  const speakerNote = document.getElementById('speakerNote');
+  let current = 0;
+  let notesVisible = false;
+
+  function getSteps(slide) {
+    return Array.from(slide.querySelectorAll('.fragment, .fragment-break'));
+  }
+
+  function isStepRevealed(el) {
+    if (el.classList.contains('fragment')) return el.classList.contains('visible');
+    if (el.classList.contains('fragment-break')) return el.classList.contains('broken');
+    return false;
+  }
+
+  function revealStep(el) {
+    if (el.classList.contains('fragment')) {
+      el.classList.add('visible');
+    } else if (el.classList.contains('fragment-break')) {
+      el.classList.add('broken');
+      el.textContent = '';
+    }
+  }
+
+  function hideStep(el) {
+    if (el.classList.contains('fragment')) {
+      el.classList.remove('visible');
+    } else if (el.classList.contains('fragment-break')) {
+      el.classList.remove('broken');
+      el.textContent = el.getAttribute('data-label') || '';
+    }
+  }
+
+  function nextFragment() {
+    const steps = getSteps(slides[current]);
+    // Break ladder rungs bottom-up (reverse), then reveal fragments top-down
+    const unrevealed = steps.filter(s => !isStepRevealed(s));
+    const nextBreak = unrevealed.filter(s => s.classList.contains('fragment-break')).pop();
+    if (nextBreak) {
+      revealStep(nextBreak);
+      saveState();
+      return true;
+    }
+    const nextFrag = unrevealed.find(s => s.classList.contains('fragment'));
+    if (nextFrag) {
+      revealStep(nextFrag);
+      saveState();
+      return true;
+    }
+    return false;
+  }
+
+  function prevFragment() {
+    const steps = getSteps(slides[current]);
+    const revealed = steps.filter(s => isStepRevealed(s));
+    // Undo fragments first (top-down), then un-break rungs bottom-up
+    const lastFrag = revealed.filter(s => s.classList.contains('fragment')).pop();
+    if (lastFrag) {
+      hideStep(lastFrag);
+      saveState();
+      return true;
+    }
+    const firstBreak = revealed.find(s => s.classList.contains('fragment-break'));
+    if (firstBreak) {
+      hideStep(firstBreak);
+      saveState();
+      return true;
+    }
+    return false;
+  }
+
+  function resetFragments(slide) {
+    getSteps(slide).forEach(s => hideStep(s));
+  }
+
+  function revealAllFragments(slide) {
+    getSteps(slide).forEach(s => revealStep(s));
+  }
+
+  function goTo(index) {
+    if (index < 0 || index >= slides.length) return;
+
+    const prev = slides[current];
+    const next = slides[index];
+
+    prev.classList.remove('active');
+    prev.classList.add('exiting');
+    setTimeout(() => prev.classList.remove('exiting'), 500);
+
+    // Going forward: reset fragments on new slide
+    // Going backward: show all fragments on previous slide
+    if (index > current) {
+      resetFragments(next);
+    } else {
+      revealAllFragments(next);
+    }
+
+    next.classList.add('active');
+    current = index;
+
+    updateProgress();
+    updateNotes();
+    saveState();
+  }
+
+  function countRevealed(slide) {
+    return getSteps(slide).filter(s => isStepRevealed(s)).length;
+  }
+
+  function saveState() {
+    const revealed = countRevealed(slides[current]);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ slide: current, fragments: revealed }));
+  }
+
+  function updateProgress() {
+    const pct = ((current + 1) / slides.length) * 100;
+    progress.style.width = pct + '%';
+    counter.textContent = (current + 1) + ' / ' + slides.length;
+  }
+
+  function updateNotes() {
+    const note = slides[current].getAttribute('data-note');
+    speakerNote.textContent = note || '';
+  }
+
+  function toggleNotes() {
+    notesVisible = !notesVisible;
+    speakerNote.classList.toggle('visible', notesVisible);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+      e.preventDefault();
+      if (!nextFragment()) {
+        goTo(current + 1);
+      }
+    }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (!prevFragment()) {
+        goTo(current - 1);
+      }
+    }
+    if (e.key === 'n' || e.key === 'N') {
+      toggleNotes();
+    }
+    if (e.key === 'Home') {
+      e.preventDefault();
+      goTo(0);
+    }
+    if (e.key === 'End') {
+      e.preventDefault();
+      goTo(slides.length - 1);
+    }
+  });
+
+  // Touch support for mobile/tablet
+  let touchStartX = 0;
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+  document.addEventListener('touchend', (e) => {
+    const diff = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(diff) > 50) {
+      if (diff < 0) { if (!nextFragment()) goTo(current + 1); }
+      else { if (!prevFragment()) goTo(current - 1); }
+    }
+  });
+
+  // Initialize — restore saved state or start from slide 0
+  function restoreState() {
+    const STORAGE_KEY = 'slide-state-v2';
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const { slide, fragments } = JSON.parse(saved);
+      // Reveal all fragments on slides before the saved one
+      for (let i = 0; i < slide && i < slides.length; i++) {
+        revealAllFragments(slides[i]);
+      }
+      // Go to saved slide
+      if (slide < slides.length) {
+        slides[slide].classList.add('active');
+        current = slide;
+        // Replay the exact number of fragment reveals on current slide
+        for (let i = 0; i < fragments; i++) {
+          nextFragment();
+        }
+      }
+    } else {
+      slides[0].classList.add('active');
+    }
+    updateProgress();
+    updateNotes();
+  }
+
+  restoreState();
+</script>
+
+</body>
+</html>
